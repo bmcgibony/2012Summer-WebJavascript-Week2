@@ -52,8 +52,10 @@
 			<p class="box"></p>
 			<p class="box"></p>		
 		</div>
+	<button type="button" id="cpumove">Let the Computer Play!</button>
+	<p style="color:red;" id="winAlert"></p>
 	</div>
-	
+
 	<script type="text/javascript" charset="utf-8">
 		var game = document.getElementById('game');
 		
@@ -96,150 +98,351 @@
 		var BL = game.children[6];
 		var BM = game.children[7];
 		var BR = game.children[8];
+		var CPU = document.getElementById('cpumove');
+		var winAlert = document.getElementById('winAlert');
+		
+		var TLval = "?";
+		var TMval = "?";
+		var TRval = "?";
+		var MLval = "?";
+		var MMval = "?";
+		var MRval = "?";
+		var BLval = "?";
+		var BMval = "?";
+		var BRval = "?";
+		
+		var gameOver = 0;
 		
 		var handleClickTL = function(event){
 			console.dir(event);
 			console.log("Button was clicked");
-			if(TLclicked==0){
+			if(TLclicked==0 && gameOver==0){
 				if(whoseTurnIsItAnyway==0||whoseTurnIsItAnyway==2||whoseTurnIsItAnyway==4||whoseTurnIsItAnyway==6||whoseTurnIsItAnyway==8){
 					TL.innerHTML="<img src='\tX.jpg'>";
 					whoseTurnIsItAnyway = whoseTurnIsItAnyway + 1;
+					TLval = "X";
 					}
 				else{
 					TL.innerHTML="<img src='\tO.jpg'>";
 					whoseTurnIsItAnyway = whoseTurnIsItAnyway + 1;
+					TLval = "O";
 				}
 			}
 			TLclicked = 1;
+			whoWon();
 		}
 		
 		var handleClickTM = function(event){
 			console.dir(event);
 			console.log("Button was clicked");
-			if(TMclicked==0){
+			if(TMclicked==0 && gameOver==0){
 				if(whoseTurnIsItAnyway==0||whoseTurnIsItAnyway==2||whoseTurnIsItAnyway==4||whoseTurnIsItAnyway==6||whoseTurnIsItAnyway==8){
 					TM.innerHTML="<img src='\tX.jpg'>";
 					whoseTurnIsItAnyway = whoseTurnIsItAnyway + 1;
+					TMval = "X";
 					}
 				else{
 					TM.innerHTML="<img src='\tO.jpg'>";
 					whoseTurnIsItAnyway = whoseTurnIsItAnyway + 1;
+					TMval = "O";
 				}
 			}
 			TMclicked = 1;
+			whoWon();
 		}
 		
 		var handleClickTR = function(event){
 			console.dir(event);
 			console.log("Button was clicked");
-			if(TRclicked==0){
+			if(TRclicked==0 && gameOver==0){
 				if(whoseTurnIsItAnyway==0||whoseTurnIsItAnyway==2||whoseTurnIsItAnyway==4||whoseTurnIsItAnyway==6||whoseTurnIsItAnyway==8){
 					TR.innerHTML="<img src='\tX.jpg'>";
 					whoseTurnIsItAnyway = whoseTurnIsItAnyway + 1;
+					TRval = "X";
 					}
 				else{
 					TR.innerHTML="<img src='\tO.jpg'>";
 					whoseTurnIsItAnyway = whoseTurnIsItAnyway + 1;
+					TRval = "O";
 				}
 			}
 			TRclicked = 1;
-			
+			whoWon();
 		}
 		
 		var handleClickML = function(event){
 			console.dir(event);
 			console.log("Button was clicked");
-			if(MLclicked==0){
+			if(MLclicked==0 && gameOver==0){
 				if(whoseTurnIsItAnyway==0||whoseTurnIsItAnyway==2||whoseTurnIsItAnyway==4||whoseTurnIsItAnyway==6||whoseTurnIsItAnyway==8){
 					ML.innerHTML="<img src='\tX.jpg'>";
 					whoseTurnIsItAnyway = whoseTurnIsItAnyway + 1;
+					MLval = "X";
 					}
 				else{
 					ML.innerHTML="<img src='\tO.jpg'>";
 					whoseTurnIsItAnyway = whoseTurnIsItAnyway + 1;
+					MLval = "O";
 				}
 			}
 			MLclicked = 1;
+			whoWon();
 		}
 		
 		var handleClickMM = function(event){
 			console.dir(event);
 			console.log("Button was clicked");
-			if(MMclicked==0){
+			if(MMclicked==0 && gameOver==0){
 				if(whoseTurnIsItAnyway==0||whoseTurnIsItAnyway==2||whoseTurnIsItAnyway==4||whoseTurnIsItAnyway==6||whoseTurnIsItAnyway==8){
 					MM.innerHTML="<img src='\tX.jpg'>";
 					whoseTurnIsItAnyway = whoseTurnIsItAnyway + 1;
+					MMval = "X";
 					}
 				else{
 					MM.innerHTML="<img src='\tO.jpg'>";
 					whoseTurnIsItAnyway = whoseTurnIsItAnyway + 1;
+					MMval = "O";
 				}
 			}
 			MMclicked = 1;
+			whoWon();
 		}
 		
 		var handleClickMR = function(event){
 			console.dir(event);
 			console.log("Button was clicked");
-			if(MRclicked==0){
+			if(MRclicked==0 && gameOver==0){
 				if(whoseTurnIsItAnyway==0||whoseTurnIsItAnyway==2||whoseTurnIsItAnyway==4||whoseTurnIsItAnyway==6||whoseTurnIsItAnyway==8){
 					MR.innerHTML="<img src='\tX.jpg'>";
 					whoseTurnIsItAnyway = whoseTurnIsItAnyway + 1;
+					MRval = "X";
 					}
 				else{
 					MR.innerHTML="<img src='\tO.jpg'>";
 					whoseTurnIsItAnyway = whoseTurnIsItAnyway + 1;
+					MRval = "O";
 				}
 			}
 			MRclicked = 1;
+			whoWon();
 		}
 		
 		var handleClickBL = function(event){
 			console.dir(event);
 			console.log("Button was clicked");
-			if(BLclicked==0){
+			if(BLclicked==0 && gameOver==0){
 				if(whoseTurnIsItAnyway==0||whoseTurnIsItAnyway==2||whoseTurnIsItAnyway==4||whoseTurnIsItAnyway==6||whoseTurnIsItAnyway==8){
 					BL.innerHTML="<img src='\tX.jpg'>";
 					whoseTurnIsItAnyway = whoseTurnIsItAnyway + 1;
+					BLval = "X";
 					}
 				else{
 					BL.innerHTML="<img src='\tO.jpg'>";
 					whoseTurnIsItAnyway = whoseTurnIsItAnyway + 1;
+					BLval = "O";
 				}
 			}
 			BLclicked = 1;
+			whoWon();
 		}
 		
 		var handleClickBM = function(event){
 			console.dir(event);
 			console.log("Button was clicked");
-			if(BMclicked==0){
+			if(BMclicked==0 && gameOver==0){
 				if(whoseTurnIsItAnyway==0||whoseTurnIsItAnyway==2||whoseTurnIsItAnyway==4||whoseTurnIsItAnyway==6||whoseTurnIsItAnyway==8){
 					BM.innerHTML="<img src='\tX.jpg'>";
 					whoseTurnIsItAnyway = whoseTurnIsItAnyway + 1;
+					BMval = "X";
 					}
 				else{
 					BM.innerHTML="<img src='\tO.jpg'>";
 					whoseTurnIsItAnyway = whoseTurnIsItAnyway + 1;
+					BMval = "O";
 				}
 			}
 			BMclicked = 1;
+			whoWon();
 		}
 		
 		var handleClickBR = function(event){
 			console.dir(event);
 			console.log("Button was clicked");
-			if(BRclicked==0){
+			if(BRclicked==0 && gameOver==0){
 				if(whoseTurnIsItAnyway==0||whoseTurnIsItAnyway==2||whoseTurnIsItAnyway==4||whoseTurnIsItAnyway==6||whoseTurnIsItAnyway==8){
 					BR.innerHTML="<img src='\tX.jpg'>";
 					whoseTurnIsItAnyway = whoseTurnIsItAnyway + 1;
+					BRval = "X";
 					}
 				else{
 					BR.innerHTML="<img src='\tO.jpg'>";
 					whoseTurnIsItAnyway = whoseTurnIsItAnyway + 1;
+					BRval = "O";
 				}
 			}
 			BRclicked = 1;
+			whoWon();
+		}
+		
+		// returns a random number between the two limits provided 
+		var randomRange = function randomRange(min, max)
+		{
+		return ((Math.floor(Math.random()*(max-min)) + min)); 
+		}
+		
+		var handleClickCPU = function(event){
+			console.dir(event);
+			console.log("Button was clicked");
+			//if(TLclicked==0){
+			//	if(whoseTurnIsItAnyway==0||whoseTurnIsItAnyway==2||whoseTurnIsItAnyway==4||whoseTurnIsItAnyway==6||whoseTurnIsItAnyway==8){
+			if(gameOver==0){
+			
+				var CPUchoice = randomRange(0,9);
+				
+				if (CPUchoice == 0){
+					if (TLclicked == 0){
+						handleClickTL();
+					}
+					else {
+						handleClickCPU();
+					}
+				}
+				else if (CPUchoice == 1){
+					if (TMclicked == 0){
+						handleClickTM();
+					}
+					else {
+						handleClickCPU();
+					}
+				}
+				else if (CPUchoice == 2){
+					if (TRclicked == 0){
+						handleClickTR();
+					}
+					else {
+						handleClickCPU();
+					}
+				}
+				else if (CPUchoice == 3){
+					if (MLclicked == 0){
+						handleClickML();
+					}
+					else {
+						handleClickCPU();
+					}
+				}
+				else if (CPUchoice == 4){
+					if (MMclicked == 0){
+						handleClickMM();
+					}
+					else {
+						handleClickCPU();
+					}
+				}
+				else if (CPUchoice == 5){
+					if (MRclicked == 0){
+						handleClickMR();
+					}
+					else {
+						handleClickCPU();
+					}
+				}
+				else if (CPUchoice == 6){
+					if (BLclicked == 0){
+						handleClickBL();
+					}
+					else {
+						handleClickCPU();
+					}
+				}
+				else if (CPUchoice == 7){
+					if (BMclicked == 0){
+						handleClickBM();
+					}
+					else {
+						handleClickCPU();
+					}
+				}
+				else if (CPUchoice == 8){
+					if (BRclicked == 0){
+						handleClickBR();
+					}
+					else {
+						handleClickCPU();
+					}
+				}
+			}
+		}
+		
+		var whoWon = function(){
+			if(TLval == "X" && TMval == "X" && TRval == "X"){
+				winAlert.innerHTML = "Professor Haseltine wins!";
+				gameOver = 1;
+			}
+			else if(MLval == "X" && MMval == "X" && MRval == "X"){
+				winAlert.innerHTML = "Professor Haseltine wins!";
+				gameOver = 1;
+			}
+			else if(BLval == "X" && BMval == "X" && BRval == "X"){
+				winAlert.innerHTML = "Professor Haseltine wins!";
+				gameOver = 1;
+			}
+			else if(TLval == "X" && MLval == "X" && BLval == "X"){
+				winAlert.innerHTML = "Professor Haseltine wins!";
+				gameOver = 1;
+			}
+			else if(TMval == "X" && MMval == "X" && BMval == "X"){
+				winAlert.innerHTML = "Professor Haseltine wins!";
+				gameOver = 1;
+			}
+			else if(TRval == "X" && MRval == "X" && BRval == "X"){
+				winAlert.innerHTML = "Professor Haseltine wins!";
+				gameOver = 1;
+			}
+			else if(TLval == "X" && MMval == "X" && BRval == "X"){
+				winAlert.innerHTML = "Professor Haseltine wins!";
+				gameOver = 1;
+			}
+			else if(BLval == "X" && MMval == "X" && TRval == "X"){
+				winAlert.innerHTML = "Professor Haseltine wins!";
+				gameOver = 1;
+			}
+			if(TLval == "O" && TMval == "O" && TRval == "O"){
+				winAlert.innerHTML = "Hooray Amanda!";
+				gameOver = 1;
+			}
+			else if(MLval == "O" && MMval == "O" && MRval == "O"){
+				winAlert.innerHTML = "Hooray Amanda!";
+				gameOver = 1;
+			}
+			else if(BLval == "O" && BMval == "O" && BRval == "O"){
+				winAlert.innerHTML = "Hooray Amanda!";
+				gameOver = 1;
+			}
+			else if(TLval == "O" && MLval == "O" && BLval == "O"){
+				winAlert.innerHTML = "Hooray Amanda!";
+				gameOver = 1;
+			}
+			else if(TMval == "O" && MMval == "O" && BMval == "O"){
+				winAlert.innerHTML = "Hooray Amanda!";
+				gameOver = 1;
+			}
+			else if(TRval == "O" && MRval == "O" && BRval == "O"){
+				winAlert.innerHTML = "Hooray Amanda!";
+				gameOver = 1;
+			}
+			else if(TLval == "O" && MMval == "O" && BRval == "O"){
+				winAlert.innerHTML = "Hooray Amanda!";
+				gameOver = 1;
+			}
+			else if(BLval == "O" && MMval == "O" && TRval == "O"){
+				winAlert.innerHTML = "Hooray Amanda!";
+				gameOver = 1;
+			}
+			else if(TLval != "?" && TMval != "?" && TRval != "?" && MLval != "?" && MMval != "?" && MRval != "?" && BLval != "?" && BMval != "?" && BRval != "?" && gameOver == 0){
+				winAlert.innerHTML = "Nobody wins. That wasn't very exciting.";
+				gameOver = 1;
+			}
 		}
 		
 		TL.addEventListener("click", handleClickTL, false);
@@ -251,6 +454,7 @@
 		BL.addEventListener("click", handleClickBL, false);
 		BM.addEventListener("click", handleClickBM, false);
 		BR.addEventListener("click", handleClickBR, false);
+		CPU.addEventListener("click", handleClickCPU, false);
 		
 	</script>
 </body>
